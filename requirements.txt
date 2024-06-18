@@ -1,2 +1,3 @@
-ollama
 streamlit
+groq
+dotenv
