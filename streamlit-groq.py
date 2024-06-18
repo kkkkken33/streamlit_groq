@@ -21,7 +21,7 @@ def generate_text(input_text):
     ],
     model="mixtral-8x7b-32768",
     )
-    st.info(response.choices[0].message.content)
+    return response.choices[0].message.content
 
 if 'messages' not in st.session_state:
     st.session_state.messages = []
