@@ -12,7 +12,7 @@ def generate_text(input_text):
         {
             "role": "system",
             "content": "You are a helpful AI Assistant. You explain ever \
-            topic the user asks as if you are explaining it to a 5 year old"
+            topic the user asks. If user asks you in Chinese, you need use Chinese to answer."
         },
         {
             "role": "user",
