@@ -2,7 +2,7 @@ from groq import Groq
 from dotenv import load_dotenv, find_dotenv
 import streamlit as st
 _ = load_dotenv(find_dotenv())
-st.title('Small app by XC😎')
+st.title('Chat with Groq!😎')
 client = Groq(
     api_key="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",
 )
@@ -23,8 +23,19 @@ def generate_text(input_text):
     )
     st.info(response.choices[0].message.content)
 
-with st.form('my_form'):
-    text = st.text_area('Enter text:', '')
-    submitted = st.form_submit_button('Submit')
-    if submitted:
-        generate_text(text)
+if 'messages' not in st.session_state:
+    st.session_state.messages = []
+messages = st.container(height=300)
+
+if prompt := st.chat_input("Say something"):
+    st.session_state.messages.append({"role": "user", "text": prompt})
+    answer = generate_text(prompt)
+    if answer is not None:
+        st.session_state.messages.append({"role": "assistant", "text":
+    answer})
+        
+for message in st.session_state.messages:
+    if message["role"] == "user":
+        messages.chat_message("user").write(message["text"])
+    elif message["role"] == "assistant":
+        messages.chat_message("assistant").write(message["text"]) 
